@@ -1,10 +1,3 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
-#include <Point.h>
-#include<QWidget>
-#include <QMainWindow>
-
-#include <QOpenGLWidget>
 #include <QOpenGLFunctions>
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -21,20 +14,28 @@ private:
     void initializeGL() override;
     void resizeGL(int w, int h) override;
     void paintGL() override;
+    void MasOfPoint();
     void drawLine();
-    void _DrawGridXY(float cx, float cy, float step);
-    void _DrawGridXZ(float cx, float cy, float step);
-    void _DrawGridYZ(float cx, float cy, float step);
+    void _DrawGridXY();
+    void _DrawGridXZ();
+    void _DrawGridYZ();
     void DrawGrid();
     void mousePressEvent(QMouseEvent*) override;
     void mouseMoveEvent(QMouseEvent*) override;
 
-   //const float arr[12] = {0.9, -0.9, 0.1, 0.5,	-0.1,	0.1, 1,	-0.4,	0.4, 1,	-0.13,	0.111};
-
+    const float arr[12] = {0.9, -0.9, 0.1, 0.5, -0.1, 0.1, 1, -0.4, 0.4, 1, -0.13, 0.111};
+    Point vect[4] = {};
+    float max_x;
+    float max_y;
+    float max_z;
+    float min_x;
+    float min_y;
+    float min_z;
 
 public:
     MainWindow(QOpenGLWidget *parent = nullptr);
 
     ~MainWindow();
 };
-#endif // MAINWINDOW_H
+    #endif // MAINWINDOW_H
+
