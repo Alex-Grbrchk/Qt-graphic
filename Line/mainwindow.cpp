@@ -79,13 +79,13 @@ void MainWindow::drawLine(){
 
     }
 
-    glVertexPointer(3, GL_FLOAT, 0, &vertices);
-    glEnableClientState(GL_VERTEX_ARRAY);
+   glVertexPointer(3, GL_FLOAT, 0, &vertices);
+   glEnableClientState(GL_VERTEX_ARRAY);
 
-    glLineWidth(5);
+   glLineWidth(5);
 
-    glDrawArrays(GL_LINES, 0 ,2);
-    glDisableClientState(GL_VERTEX_ARRAY);
+   glDrawArrays(GL_LINES, 0 ,2);
+   glDisableClientState(GL_VERTEX_ARRAY);
 
 }
 
@@ -132,65 +132,113 @@ void MainWindow::DrawGrid(){
 
 void MainWindow:: _DrawGridXY()
 {
+     float vertices[6] = {0, 0, min_z, 0, 0, min_z};
+     vertices[1]=max_y;
+     vertices[4]=min_y;
+
 
     for(float x = min_x; x <= max_x; x += 0.1){
+        vertices[0]=x;
+        vertices[3]=x;
+
+        glVertexPointer(3, GL_FLOAT, 0, &vertices);
+        glEnableClientState(GL_VERTEX_ARRAY);
 
         glLineWidth(1);
-        glBegin(GL_LINES);
-        glVertex3f(x,max_y, min_z);
-        glVertex3f(x, min_y, min_z);//-_cy
-        glEnd();
+
+        glDrawArrays(GL_LINES, 0 ,2);
+        glDisableClientState(GL_VERTEX_ARRAY);
+
     }
+    vertices[0]=max_x;
+    vertices[3]=min_x;
 
     for(float y = min_y; y <= max_y; y += 0.1){
+        vertices[1]=y;
+        vertices[4]=y;
+
+        glVertexPointer(3, GL_FLOAT, 0, &vertices);
+        glEnableClientState(GL_VERTEX_ARRAY);
+
         glLineWidth(1);
-        glBegin(GL_LINES);
-        glVertex3f(max_x, y, min_z);
-        glVertex3f(min_x, y, min_z);//-_cx
-        glEnd();
+
+        glDrawArrays(GL_LINES, 0 ,2);
+        glDisableClientState(GL_VERTEX_ARRAY);
+      
     }
 }
 
 void MainWindow:: _DrawGridXZ()
 {
-    for(float x = min_x; x <= max_x; x += 0.1)
-    {
-    glLineWidth(1);
-    glBegin(GL_LINES);
-    glVertex3f(x, min_y, max_z);
-    glVertex3f(x, min_y, min_z);//-_cz
-    glEnd();
-    }
+    float vertices[6] = {0, min_y, 0, 0, min_y, 0};
+    vertices[2] = max_z;
+    vertices[5] = min_z;
+    for(float x = min_x; x <= max_x; x += 0.1){
+        vertices[0] = x;
+        vertices[3] = x;
 
+        glVertexPointer(3, GL_FLOAT, 0, &vertices);
+        glEnableClientState(GL_VERTEX_ARRAY);
+
+        glLineWidth(1);
+
+        glDrawArrays(GL_LINES, 0 ,2);
+        glDisableClientState(GL_VERTEX_ARRAY);
+        
+    }
+    vertices[0] = max_x;
+    vertices[3] = min_x;
     for(float z = min_z; z <= max_z; z += 0.1)
     {
-    glLineWidth(1);
-    glBegin(GL_LINES);
-    glVertex3f(max_x, min_y, z);
-    glVertex3f(min_x,min_y, z);//-_cx
-    glEnd();
+        vertices[2] = z;
+        vertices[5] = z;
+
+        glVertexPointer(3, GL_FLOAT, 0, &vertices);
+        glEnableClientState(GL_VERTEX_ARRAY);
+
+        glLineWidth(1);
+
+        glDrawArrays(GL_LINES, 0 ,2);
+        glDisableClientState(GL_VERTEX_ARRAY);
+      
     }
 }
 
 void MainWindow:: _DrawGridYZ()
 {
+    float vertices[6] = {min_x, 0, 0, min_x, 0, 0};
+    vertices[2] = max_z;
+    vertices[5] = min_z;
 
     for(float y = min_y; y <= max_y; y += 0.1)
     {
-    glLineWidth(1);
-    glBegin(GL_LINES);
-    glVertex3f(min_x, y, max_z);
-    glVertex3f(min_x, y, min_z);//-_cz
-    glEnd();
-    }
+        vertices[1] = y;
+        vertices[4] = y;
 
+        glVertexPointer(3, GL_FLOAT, 0, &vertices);
+        glEnableClientState(GL_VERTEX_ARRAY);
+
+        glLineWidth(1);
+
+        glDrawArrays(GL_LINES, 0 ,2);
+        glDisableClientState(GL_VERTEX_ARRAY);
+        
+    }
+    vertices[1] = max_y;
+    vertices[4] = min_y;
     for(float z = min_z; z <= max_z; z += 0.1)
     {
-    glLineWidth(1);
-    glBegin(GL_LINES);
-    glVertex3f(min_x, max_y, z);
-    glVertex3f(min_x, min_y, z);//-_cy
-    glEnd();
+        vertices[2] = z;
+        vertices[5] = z;
+
+        glVertexPointer(3, GL_FLOAT, 0, &vertices);
+        glEnableClientState(GL_VERTEX_ARRAY);
+
+        glLineWidth(1);
+
+        glDrawArrays(GL_LINES, 0 ,2);
+        glDisableClientState(GL_VERTEX_ARRAY);
+        
     }
 }
 
@@ -210,3 +258,4 @@ void MainWindow::mouseMoveEvent(QMouseEvent * mo){
 MainWindow::~MainWindow()
 {
 }
+
